@@ -13,7 +13,7 @@ export class AuthService {
 
     // Call any endpoint that requires auth (pick something cheap).
     // If you have /actuator/health as permitAll, DON'T use that.
-    return this.http.get('http://localhost:8081/actors?page=0&page_size=1', {
+    return this.http.get('http://localhost:8080/actors?page=0&page_size=1', {
       headers: { Authorization: `Basic ${token}` },
     }).pipe(
       tap(() => localStorage.setItem(this.key, token)),
