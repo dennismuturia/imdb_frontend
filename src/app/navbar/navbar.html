@@ -1,0 +1,18 @@
+<nav class="nav">
+  <div class="nav__left">
+    <a class="brand" routerLink="/actors">IMDB Demo</a>
+
+    @if (auth.isLoggedIn()) {
+      <a class="link" routerLink="/actors" routerLinkActive="active">Actors</a>
+      <a class="link" routerLink="/movies" routerLinkActive="active">Movies</a>
+    }
+  </div>
+
+  <div class="nav__right">
+    @if (auth.isLoggedIn()) {
+      <button class="btn" type="button" (click)="logout()">Logout</button>
+    } @else {
+      <a class="link" routerLink="/login" routerLinkActive="active">Login</a>
+    }
+  </div>
+</nav>

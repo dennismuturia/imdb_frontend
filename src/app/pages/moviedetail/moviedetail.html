@@ -1,0 +1,58 @@
+<div class="page">
+  <div class="header">
+    <button class="btn btn--ghost" type="button" (click)="backToMovies()">
+      <span class="icon">←</span>
+      Back to Movies
+    </button>
+
+    <div class="title">
+      <h2>Movie Details</h2>
+      <p class="subtitle">
+        Movie ID: <span class="pill">{{ movieId }}</span>
+      </p>
+    </div>
+  </div>
+
+  @if (error) {
+    <div class="alert alert--error">
+      <strong>Oops!</strong> {{ error }}
+    </div>
+  }
+
+  <div class="card">
+    @if (loading) {
+      <div class="loading">
+        <div class="spinner"></div>
+        <div>
+          <div class="loading__title">Loading movie…</div>
+          <div class="loading__hint">Fetching details, please wait.</div>
+        </div>
+      </div>
+    } @else {
+      @if (movie) {
+        <div class="grid">
+          <div class="field">
+            <div class="label">Title</div>
+            <div class="value">{{ movie.title }}</div>
+          </div>
+
+          <div class="field">
+            <div class="label">Year</div>
+            <div class="value">{{ movie.year || '—' }}</div>
+          </div>
+
+          <div class="field">
+            <div class="label">ID</div>
+            <div class="value mono">{{ movie.id }}</div>
+          </div>
+        </div>
+      } @else {
+        <div class="empty">
+          <div class="empty__emoji">🎬</div>
+          <div class="empty__title">No movie data</div>
+          <div class="empty__hint">Try opening the movie again.</div>
+        </div>
+      }
+    }
+  </div>
+</div>

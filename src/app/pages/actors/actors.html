@@ -1,0 +1,88 @@
+<div class="page">
+  <div class="header">
+    <div>
+      <h2 class="title">Actors</h2>
+      <p class="subtitle">Search actors and open their appearances.</p>
+    </div>
+
+    @if (auth.isLoggedIn()) {
+      <button class="btn btn--ghost" type="button" (click)="logout()">Logout</button>
+    }
+  </div>
+
+  <div class="card">
+    <div class="search">
+      <input
+        class="input"
+        [(ngModel)]="name"
+        placeholder="Search actor name…"
+        (keyup.enter)="search()"
+      />
+      <button class="btn btn--primary" type="button" (click)="search()">Search</button>
+    </div>
+
+    @if (error) {
+      <div class="alert alert--error">
+        <strong>Oops!</strong> {{ error }}
+      </div>
+    }
+
+    @if (loading) {
+      <div class="loading">
+        <div class="spinner"></div>
+        <div>
+          <div class="loading__title">Loading actors…</div>
+          <div class="loading__hint">Fetching results, please wait.</div>
+        </div>
+      </div>
+    } @else {
+
+      @if (actors?.length === 0) {
+        <div class="empty">
+          <div class="empty__title">No actors found</div>
+          <div class="empty__hint">Try a different name or clear the search.</div>
+        </div>
+      } @else {
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th class="actions"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+              @for (a of actors; track a.id) {
+                <tr>
+                  <td class="mono">{{ a.id }}</td>
+                  <td class="name">{{ a.name }}</td>
+                  <td>
+                    <button class="btn btn--primary btn--sm" type="button" (click)="openActor(a)">
+                      View
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <button class="btn btn--ghost" type="button" (click)="prev()" [disabled]="page===0">
+            ← Prev
+          </button>
+
+          <div class="pager__meta">
+            Page <span class="pill">{{ page }}</span>
+          </div>
+
+          <button class="btn btn--ghost" type="button" (click)="next()">
+            Next →
+          </button>
+        </div>
+      }
+    }
+  </div>
+</div>

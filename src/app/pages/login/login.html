@@ -1,0 +1,15 @@
+<div style="max-width:420px;margin:40px auto;">
+  <h2>Login</h2>
+  @if (error) {
+    <div  style="color:#b00020;margin:10px 0;">{{ error }}</div>
+
+  }
+
+  <label>Username</label>
+  <input [(ngModel)]="username" style="width:100%;padding:8px;margin:6px 0 14px;" />
+
+  <label>Password</label>
+  <input [(ngModel)]="password" type="password" style="width:100%;padding:8px;margin:6px 0 14px;" />
+
+  <button (click)="submit()" style="padding:10px 14px;">Sign in</button>
+</div>

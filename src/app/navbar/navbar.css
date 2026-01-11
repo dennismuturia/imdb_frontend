@@ -1,0 +1,50 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  background: white;
+}
+
+.nav__left, .nav__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand {
+  font-weight: 700;
+  text-decoration: none;
+  color: #111827;
+  margin-right: 8px;
+}
+
+.link {
+  text-decoration: none;
+  color: #374151;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.link:hover {
+  background: #f3f4f6;
+}
+
+.active {
+  background: #eef2ff;
+  color: #1f2937;
+}
+
+.btn {
+  border: 1px solid #e5e7eb;
+  background: #111827;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 0.92;
+}

@@ -1,0 +1,74 @@
+<div class="page">
+  <div class="page__header">
+    <button class="btn btn--ghost" type="button" (click)="back()">
+      <span class="icon">←</span>
+      Back
+    </button>
+
+    <div class="title">
+      <h2>Appearances</h2>
+      <p class="subtitle">Actor ID: <span class="pill">{{ actorId }}</span></p>
+    </div>
+  </div>
+
+  @if (error) {
+    <div class="alert alert--error">
+      <strong>Oops!</strong> {{ error }}
+    </div>
+  }
+
+  <div class="card">
+    @if (loading) {
+      <div class="loading">
+        <div class="spinner"></div>
+        <div>
+          <div class="loading__title">Loading appearances…</div>
+          <div class="loading__hint">Hang tight, fetching credits.</div>
+        </div>
+      </div>
+    } @else {
+
+      @if (appearances?.length === 0) {
+        <div class="empty">
+          <div class="empty__title">No appearances found</div>
+          <div class="empty__hint">Try another actor id.</div>
+        </div>
+      } @else {
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Movie</th>
+              <th>Character</th>
+              <th class="cell-actions"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+              @for (a of appearances; track a.movie_id) {
+                <tr>
+                  <td>
+                    <div class="movie">
+                      <div class="movie__name">{{ a.movie_name }}</div>
+                      <div class="movie__meta">ID: {{ a.movie_id }}</div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <span class="chip">{{ a.character_name || 'Unknown' }}</span>
+                  </td>
+
+                  <td class="cell-actions">
+                    <button class="btn btn--primary" type="button" (click)="openMovie(a.movie_id)">
+                      View movie
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    }
+  </div>
+</div>
