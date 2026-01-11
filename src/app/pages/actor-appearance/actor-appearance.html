@@ -68,6 +68,31 @@
             </tbody>
           </table>
         </div>
+        <div class="pager">
+          <button
+            class="btn btn--ghost"
+            type="button"
+            (click)="prev()"
+            [disabled]="!hasPrev || loading"
+          >
+            ← Prev
+          </button>
+
+          <div class="pager__meta">
+            Page <span class="pill">{{ page + 1 }}</span>
+            <span class="pager__count"> • Showing {{ appearances?.length || 0 }}</span>
+          </div>
+
+          <button
+            class="btn btn--ghost"
+            type="button"
+            (click)="next()"
+            [disabled]="!hasNext || loading"
+          >
+            Next →
+          </button>
+        </div>
+
       }
     }
   </div>

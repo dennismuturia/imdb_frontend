@@ -19,6 +19,10 @@ export class ActorAppearances implements OnInit {
   loading = false;
   error = '';
 
+  // ✅ pager flags
+  hasNext = false;
+  hasPrev = false;
+
   constructor(
     private route: ActivatedRoute,
     private api: ImdbService,
@@ -43,6 +47,9 @@ export class ActorAppearances implements OnInit {
     this.loading = true;
     this.error = '';
 
+    // ✅ compute prev immediately
+    this.hasPrev = this.page > 0;
+
     this.api.getActorAppearances(this.actorId, this.page, this.pageSize)
       .pipe(
         timeout(10000),
@@ -52,13 +59,43 @@ export class ActorAppearances implements OnInit {
         })
       )
       .subscribe({
-        next: res => (this.appearances = res),
-        error: err => (this.error = err?.error?.message || err?.message || 'Failed to load appearances'),
+        next: (res) => {
+          console.log('[ActorAppearances] API response:', res);
+          this.appearances = res ?? [];
+
+          // ✅ allow next only if we got a full page (likely more data exists)
+          this.hasNext = this.appearances.length === this.pageSize;
+
+          // ✅ keep prev consistent
+          this.hasPrev = this.page > 0;
+        },
+        error: (err) => {
+          console.error('[ActorAppearances] API error:', err);
+          this.error =
+            err?.error?.message ||
+            err?.message ||
+            'Failed to load appearances';
+
+          // ✅ on error, disable next (optional)
+          this.hasNext = false;
+        }
       });
   }
 
   back() {
     this.location.back();
+  }
+
+  next() {
+    if (!this.hasNext || this.loading) return;
+    this.page++;
+    this.load();
+  }
+
+  prev() {
+    if (!this.hasPrev || this.loading) return;
+    this.page--;
+    this.load();
   }
 
   openMovie(movieId: number) {
