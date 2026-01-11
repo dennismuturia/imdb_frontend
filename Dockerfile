@@ -18,3 +18,4 @@ COPY --from=builder /app/dist/*/browser/ /usr/share/nginx/html/
 
 EXPOSE 80
 
+
