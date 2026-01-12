@@ -41,7 +41,6 @@ export class Movies implements OnInit {
       )
       .subscribe({
         next: res => {
-          console.log('Successfully fetched movies:', res);
           this.movies = res;
         },
         error: err => {

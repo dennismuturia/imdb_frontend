@@ -45,7 +45,6 @@ export class Actors implements OnInit {
       )
       .subscribe({
         next: res => {
-          console.log('Successfully fetched actors:', res);
           this.actors = res;
         },
         error: err => {

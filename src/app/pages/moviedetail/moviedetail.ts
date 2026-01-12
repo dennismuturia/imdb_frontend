@@ -51,7 +51,6 @@ export class MovieDetails implements OnInit {
       )
       .subscribe({
         next: m => {
-          console.log('Successfully fetched movie details:', m);
           this.movie = m;
         },
         error: err => {

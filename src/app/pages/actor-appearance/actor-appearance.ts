@@ -60,7 +60,6 @@ export class ActorAppearances implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          console.log('[ActorAppearances] API response:', res);
           this.appearances = res ?? [];
 
           // ✅ allow next only if we got a full page (likely more data exists)
